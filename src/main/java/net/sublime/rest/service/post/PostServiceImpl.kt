@@ -1,11 +1,12 @@
-package net.sublime.rest.service
+package net.sublime.rest.service.post
 
-import net.sublime.rest.model.Post
+import net.sublime.rest.model.post.Post
 import net.sublime.rest.repository.PostRepository
+import net.sublime.rest.service.post.PostService
 import org.springframework.stereotype.Service
 
 @Service
-class PostServiceImpl(private val postRepository: PostRepository) : PostService{
+class PostServiceImpl(private val postRepository: PostRepository) : PostService {
     override fun getAll(): List<Post> = postRepository.findAll()
 
     override fun getPost(id: Long): Post = postRepository.getOne(id)

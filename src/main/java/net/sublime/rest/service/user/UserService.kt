@@ -1,4 +1,4 @@
-package net.sublime.rest.service
+package net.sublime.rest.service.user
 
 import net.sublime.rest.model.user.User
 

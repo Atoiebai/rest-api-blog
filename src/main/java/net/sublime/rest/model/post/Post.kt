@@ -1,4 +1,4 @@
-package net.sublime.rest.model
+package net.sublime.rest.model.post
 
 import javax.persistence.*
 

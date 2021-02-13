@@ -1,7 +1,8 @@
-package net.sublime.rest.service
+package net.sublime.rest.service.user
 
 import net.sublime.rest.model.user.User
 import net.sublime.rest.repository.UserRepository
+import net.sublime.rest.service.user.UserService
 import org.springframework.stereotype.Service
 
 @Service
