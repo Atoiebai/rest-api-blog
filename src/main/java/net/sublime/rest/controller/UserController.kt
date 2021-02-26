@@ -35,14 +35,7 @@ class UserController(
         return ResponseEntity(HttpStatus.CREATED)
     }
 
-//    @PostMapping("/create")
-//    fun createUser(@RequestBody users: Array<User>): ResponseEntity<Any> {
-//        // TODO: 2/13/2021 Validate user
-//        userService.addUsers(users)
-//        return ResponseEntity(HttpStatus.CREATED)
-//    }
-
-    @PutMapping("{id}/update")
+    @PutMapping("/{id}/update")
     fun updateUser(@RequestBody user: User) {
         userService.updateUser(user)
     }

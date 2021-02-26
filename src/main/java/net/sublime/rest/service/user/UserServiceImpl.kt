@@ -4,12 +4,13 @@ import net.sublime.rest.model.user.Role
 import net.sublime.rest.model.user.Status
 import net.sublime.rest.model.user.User
 import net.sublime.rest.repository.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class UserServiceImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+//    private val passwordEncoder: PasswordEncoder
 ) : UserService {
 
     override fun getAll(): List<User> = userRepository.findAll()
@@ -20,22 +21,18 @@ class UserServiceImpl(
         TODO("Not yet implemented")
     }
 
-    override fun addUser(user: User) {
+    override fun addUser(user: User):Boolean {
+        // TODO: 2/26/2021 false if user exist 
         user.status = Status.ACTIVE
         user.role = Role.USER
         user.slug = user.username
-        user.createdAt = Date()
+//        user.password
         userRepository.save(user)
+        return true
     }
-
 
     override fun updateUser(user: User) {
         userRepository.save(user)
-    }
-
-    override fun addUsers( users: Array<User>) {
-        // TODO: 2/16/2021 status/slug/role 
-        userRepository.saveAll(users.toList())
     }
 
 }

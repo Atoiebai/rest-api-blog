@@ -1,5 +1,10 @@
 package net.sublime.rest.model.user
 
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
@@ -9,56 +14,81 @@ import javax.validation.constraints.Size
 
 // TODO: 2/16/2021 Annotation style
 // TODO: 2/16/2021 JsonOrder
-// TODO: 2/16/2021 Constructor args
 @Entity
 @Table(name = "users")
-data class User(
+class User() : UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    var id: Long? = null
 
     @Column(nullable = false, unique = true)
     @Size(min = 2, max = 30, message = "username should be between 2 & 30 letters")
-    var username: String? = null,
+    private var username: String? = null
 
     @Column(nullable = false)
-    var firstName: String? = null,
+    var firstName: String? = null
 
     @Column(nullable = false)
-    var lastName: String? = null,
+    var lastName: String? = null
 
-    @Email
+    @Email(message = "Incorrect email")
     @Column(nullable = false, unique = true)
-    var email: String? = null,
+    var email: String? = null
 
     @Column(nullable = false)
     @Max(value = 100, message = "We aren't sure its your real age")
     @Min(value = 0, message = "You are to young, buddy")
-    var age: Int? = null,
+    var age: Int? = null
 
     @Column(nullable = false)
-    @Size(min = 6, message = "password should contain at least 6 characters")
-    var password: String? = null,
+    @Size(min = 5, message = "password should contain at least 5 characters")
+    private var password: String? = null
 
     @Enumerated(EnumType.STRING)
-    var sex: Sex? = null,
+    var sex: Sex? = null
 
-
-    ) {
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    var createdAt: Date? = null
 
     @Column(nullable = false)
-    var createdAt: Date? = null
+    @UpdateTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    var updatedAt: Date? = null
 
     @Column(nullable = false, unique = true)
     var slug: String? = null
 
-    @Column(insertable = false)
-
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     var status: Status? = null
 
     @Enumerated(EnumType.STRING)
     var role: Role? = null
+    override fun getAuthorities(): MutableCollection<GrantedAuthority> {
+        return role!!.getAuthorities()
+    }
+
+    fun setPassword(password: String) {
+        this.password = password
+    }
+
+    override fun getPassword(): String = password!!
+
+    fun setUsername(username: String) {
+        this.username = username
+    }
+
+    override fun getUsername(): String = username!!
+
+    override fun isAccountNonExpired(): Boolean = status!! == Status.ACTIVE
+
+    override fun isAccountNonLocked(): Boolean = status!! == Status.ACTIVE
+
+    override fun isCredentialsNonExpired(): Boolean = status!! == Status.ACTIVE
+
+    override fun isEnabled(): Boolean = status!! == Status.ACTIVE
 
 }
