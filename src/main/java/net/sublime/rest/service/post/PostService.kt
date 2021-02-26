@@ -1,6 +1,6 @@
-package net.sublime.rest.service
+package net.sublime.rest.service.post
 
-import net.sublime.rest.model.Post
+import net.sublime.rest.model.post.Post
 
 interface PostService {
     fun getAll(): List<Post>
