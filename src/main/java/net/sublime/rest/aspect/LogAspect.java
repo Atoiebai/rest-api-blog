@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -16,14 +15,13 @@ import org.springframework.stereotype.Component;
 public class LogAspect {
 
     public LogAspect() {
-        System.out.println("CREATED");
+        System.out.println("Created LogAspect");
     }
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("within(net.sublime.rest.service..* )")
-    public void logPointcut() {
-    }
+    @Pointcut("within(net.sublime.rest.service.user..* )")
+    public void logPointcut() {}
 
     @Before("logPointcut()")
     public void beforeLogging(@NotNull JoinPoint joinPoint) {
