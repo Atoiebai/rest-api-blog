@@ -16,6 +16,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" value="5a90a379-1151-4dc3-9f2d-064b10a9fd97" />
+          <factory-entry name="spring-rest-blog" value="a4231949-7340-4fd0-98c3-bb099286d961" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

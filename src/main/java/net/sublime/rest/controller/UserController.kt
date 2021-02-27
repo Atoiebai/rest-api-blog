@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/blog/users")
-class UserController(
+open class UserController(
     private val userService: UserService
 ) {
 
     @GetMapping
-    fun getUsers(): ResponseEntity<List<User>> {
+    open fun getUsers(): ResponseEntity<List<User>> {
         return if (userService.getAll().isEmpty())
             ResponseEntity(HttpStatus.NO_CONTENT)
         else
@@ -21,7 +21,7 @@ class UserController(
     }
 
     @GetMapping("/{id}")
-    fun getUser(@PathVariable id: Long): ResponseEntity<User> {
+    open fun getUser(@PathVariable id: Long): ResponseEntity<User> {
         return if (userService.getUser(id).equals(null))
             ResponseEntity(HttpStatus.BAD_REQUEST)
         else ResponseEntity(userService.getUser(id), HttpStatus.OK)
@@ -29,14 +29,14 @@ class UserController(
 
 
     @PostMapping("/create")
-    fun createUser(@RequestBody user: User): ResponseEntity<Any> {
+   open fun createUser(@RequestBody user: User): ResponseEntity<Any> {
         // TODO: 2/13/2021 Validate user
         userService.addUser(user)
         return ResponseEntity(HttpStatus.CREATED)
     }
 
     @PutMapping("/{id}/update")
-    fun updateUser(@RequestBody user: User) {
+   open fun updateUser(@RequestBody user: User) {
         userService.updateUser(user)
     }
 
