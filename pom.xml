@@ -19,7 +19,7 @@
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
         <kotlin.version>1.4.30</kotlin.version>
-            <start-class>net.sublime.rest.SpringRestApplication</start-class>
+            <start-class>net.sublime.rest.Application</start-class>
     </properties>
 
     <dependencies>
