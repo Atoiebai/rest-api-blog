@@ -26,11 +26,10 @@ public class LogAspect {
     @Before("logPointcut()")
     public void beforeLogging(@NotNull JoinPoint joinPoint) {
         logger.info("Invoke method " + joinPoint.getSignature());
-
     }
 
     @After("logPointcut()")
-    public void afterLogging(JoinPoint joinPoint) {
+    public void afterLogging(@NotNull JoinPoint joinPoint) {
         logger.info("Complete method " + joinPoint.getSignature());
     }
 }

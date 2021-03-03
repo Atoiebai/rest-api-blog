@@ -1,15 +1,15 @@
 package net.sublime.rest.service.user
 
-import net.sublime.rest.model.user.User
+import net.sublime.rest.dto.user.UserDTO
 
 interface UserService {
-    fun getAll(): List<User>
+    fun getAll(): List<UserDTO>
 
-    fun getUser(id: Long): User
+    fun getUser(id: Long): UserDTO
 
     fun blockUser(id: Long)
 
-    fun addUser(user: User): Boolean
+    fun addUser(userDTO: UserDTO): Boolean
 
-    fun updateUser(user: User)
+    fun updateUser(userDTO: UserDTO)
 }
