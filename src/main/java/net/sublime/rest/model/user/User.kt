@@ -16,7 +16,7 @@ import javax.validation.constraints.Size
 // TODO: 2/16/2021 JsonOrder
 @Entity
 @Table(name = "users")
-class User() : UserDetails {
+class User : UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ class User() : UserDetails {
 
     @Column(nullable = false, unique = true)
     @Size(min = 2, max = 30, message = "username should be between 2 & 30 letters")
-    private var username: String? = null
+     var userName: String? = null
 
     @Column(nullable = false)
     var firstName: String? = null
@@ -41,9 +41,9 @@ class User() : UserDetails {
     @Min(value = 0, message = "You are to young, buddy")
     var age: Int? = null
 
-    @Column(nullable = false)
+    @Column(name = "password")
     @Size(min = 5, message = "password should contain at least 5 characters")
-    private var password: String? = null
+    var passwordKey: String? = null
 
     @Enumerated(EnumType.STRING)
     var sex: Sex? = null
@@ -71,17 +71,9 @@ class User() : UserDetails {
         return role!!.getAuthorities()
     }
 
-    fun setPassword(password: String) {
-        this.password = password
-    }
+    override fun getPassword(): String = passwordKey!!
 
-    override fun getPassword(): String = password!!
-
-    fun setUsername(username: String) {
-        this.username = username
-    }
-
-    override fun getUsername(): String = username!!
+    override fun getUsername(): String = userName!!
 
     override fun isAccountNonExpired(): Boolean = status!! == Status.ACTIVE
 
