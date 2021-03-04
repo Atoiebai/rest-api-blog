@@ -24,6 +24,7 @@ public class UserServiceTest {
     @Test
     @DisplayName("User added successfully")
     public void addUser() {
+
         UserDTO user = new UserDTO();
         user.setUsername("Sublime_47");
         boolean isUserCreated = userService.addUser(user);

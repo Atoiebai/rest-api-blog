@@ -34,8 +34,9 @@ open class UserServiceImpl(
         user.status = Status.ACTIVE
         user.role = Role.USER
         user.slug = user.username
-//        user.passwordKey = passwordEncoder.encode(user.passwordKey)
+        user.passwordKey = passwordEncoder.encode(user.passwordKey)
         userRepository.save(user)
+        print(user)
         return true
     }
 

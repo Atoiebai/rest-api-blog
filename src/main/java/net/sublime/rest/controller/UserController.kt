@@ -1,7 +1,6 @@
 package net.sublime.rest.controller
 
 import net.sublime.rest.dto.user.UserDTO
-import net.sublime.rest.model.user.User
 import net.sublime.rest.service.user.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -30,14 +29,14 @@ open class UserController(
 
 
     @PostMapping("/create")
-   open fun createUser(@RequestBody userDTO: UserDTO): ResponseEntity<Any> {
+    open fun createUser(@RequestBody userDTO: UserDTO): ResponseEntity<Any> {
         // TODO: 2/13/2021 Validate user
         userService.addUser(userDTO)
         return ResponseEntity(HttpStatus.CREATED)
     }
 
     @PutMapping("/{id}/update")
-   open fun updateUser(@RequestBody userDTO: UserDTO) {
+    open fun updateUser(@RequestBody userDTO: UserDTO) {
         userService.updateUser(userDTO)
     }
 

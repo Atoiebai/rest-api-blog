@@ -9,7 +9,9 @@ fun User.toTransferObject() = UserDTO(
     firstName = this.firstName,
     lastName = this.lastName,
     email = this.email,
-    password = this.passwordKey
+    password = this.passwordKey,
+    age = this.age,
+    sex = this.sex
 )
 
 fun UserDTO.toUserEntity(): User {
@@ -20,5 +22,7 @@ fun UserDTO.toUserEntity(): User {
     user.firstName = this.firstName
     user.lastName = this.lastName
     user.passwordKey = this.password
+    user.sex = this.sex
+    user.age = this.age
     return user
 }

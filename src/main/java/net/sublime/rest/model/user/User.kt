@@ -16,9 +16,7 @@ import javax.validation.constraints.Size
 // TODO: 2/16/2021 JsonOrder
 @Entity
 @Table(name = "users")
-class User(
-
-) : UserDetails {
+class User : UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +41,7 @@ class User(
     @Min(value = 0, message = "You are to young, buddy")
     var age: Int? = null
 
-    @Column(nullable = false)
+    @Column(name = "password")
     @Size(min = 5, message = "password should contain at least 5 characters")
     var passwordKey: String? = null
 
