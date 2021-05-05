@@ -24,7 +24,7 @@ class User : UserDetails {
 
     @Column(nullable = false, unique = true)
     @Size(min = 2, max = 30, message = "username should be between 2 & 30 letters")
-     var userName: String? = null
+    var userName: String? = null
 
     @Column(nullable = false)
     var firstName: String? = null

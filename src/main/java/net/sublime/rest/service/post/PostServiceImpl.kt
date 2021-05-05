@@ -3,6 +3,7 @@ package net.sublime.rest.service.post
 import net.sublime.rest.model.post.Post
 import net.sublime.rest.repository.PostRepository
 import net.sublime.rest.service.post.PostService
+import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Service
 
 @Service

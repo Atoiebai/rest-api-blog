@@ -5,6 +5,7 @@ import net.sublime.rest.model.user.Role
 import net.sublime.rest.model.user.Status
 import net.sublime.rest.model.user.User
 import net.sublime.rest.repository.UserRepository
+import org.springframework.data.repository.CrudRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
@@ -13,6 +14,7 @@ import java.util.stream.Collectors
 open class UserServiceImpl(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
+
 ) : UserService {
 
     override fun getAll(): List<UserDTO> = userRepository
