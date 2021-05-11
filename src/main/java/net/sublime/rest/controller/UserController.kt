@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/blog/users")
 open class UserController(
     private val userService: UserService,
-    private val crudRepository: CrudRepository<User, Long>
 ) {
 
     @CrossOrigin(origins = ["http://localhost:4200"])

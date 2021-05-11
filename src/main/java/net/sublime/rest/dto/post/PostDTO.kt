@@ -1,5 +1,11 @@
 package net.sublime.rest.dto.post
 
-class PostDTO() {
-    // TODO: 2/13/2021 Create DTO if it there will be a case to use it
+import net.sublime.rest.model.user.User
+
+data class PostDTO(
+    var id: Long?=null,
+    var title: String?=null,
+    var content: String?=null,
+    var user: User?=null
+) {
 }

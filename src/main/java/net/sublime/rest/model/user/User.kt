@@ -1,5 +1,6 @@
 package net.sublime.rest.model.user
 
+import net.sublime.rest.model.post.Post
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.format.annotation.DateTimeFormat
@@ -15,14 +16,20 @@ import javax.validation.constraints.Size
 // TODO: 2/16/2021 Annotation style
 // TODO: 2/16/2021 JsonOrder
 @Entity
-@Table(name = "users")
+@Table(
+    name = "users", uniqueConstraints = [
+        UniqueConstraint(name = "user_email_unique", columnNames = ["email"]),
+        UniqueConstraint(name = "user_username_unique", columnNames = ["username"]),
+        UniqueConstraint(name = "user_slug", columnNames = ["slug"])
+    ]
+)
 class User : UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "username", nullable = false)
     @Size(min = 2, max = 30, message = "username should be between 2 & 30 letters")
     var userName: String? = null
 
@@ -33,7 +40,7 @@ class User : UserDetails {
     var lastName: String? = null
 
     @Email(message = "Incorrect email")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     var email: String? = null
 
     @Column(nullable = false)
@@ -58,7 +65,7 @@ class User : UserDetails {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     var updatedAt: Date? = null
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     var slug: String? = null
 
     @Column(nullable = false)
@@ -67,6 +74,10 @@ class User : UserDetails {
 
     @Enumerated(EnumType.STRING)
     var role: Role? = null
+
+    @OneToMany
+    var posts: List<Post>? = null
+
     override fun getAuthorities(): MutableCollection<GrantedAuthority> {
         return role!!.getAuthorities()
     }
