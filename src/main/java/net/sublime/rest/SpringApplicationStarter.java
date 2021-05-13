@@ -5,10 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SpringApplicationStarter {
-
     public static void main(String[] args) {
-        var applicationContext = SpringApplication.run(SpringApplicationStarter.class, args);
+     SpringApplication.run(SpringApplicationStarter.class, args);
     }
-
 }
 

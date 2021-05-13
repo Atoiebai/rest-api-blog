@@ -70,7 +70,7 @@ class User : UserDetails {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    var status: Status? = null
+    var status: Status? = Status.UNCONFIRMED
 
     @Enumerated(EnumType.STRING)
     var role: Role? = null
