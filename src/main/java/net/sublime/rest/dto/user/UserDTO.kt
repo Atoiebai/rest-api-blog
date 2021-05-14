@@ -11,8 +11,4 @@ data class UserDTO(
     var email: String? = null,
     var password: String? = null,
     var sex: Sex? = null
-) {
-    // TODO: 2/13/2021 Create DTO if it there will be a case to use it
-
-
-}
+)

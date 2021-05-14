@@ -4,5 +4,4 @@ enum class Status {
     ACTIVE,
     UNCONFIRMED,
     BANNED;
-
 }
