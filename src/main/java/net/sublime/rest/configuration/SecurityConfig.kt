@@ -1,12 +1,15 @@
 package net.sublime.rest.configuration
 
 import net.sublime.rest.configuration.encoder.EncoderConfig
+import net.sublime.rest.jwt.JwtUsernameAndPasswordAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 
 
@@ -22,15 +25,21 @@ open class SecurityConfig(
         http
             .csrf()
             .disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .addFilter(JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
             .authorizeRequests()
-            .antMatchers("/api/blog/users/create", "/api/blog/users")
+            .antMatchers("/api/blog/users/create")
             .permitAll()
             .anyRequest()
             .authenticated()
-            .and()
-            .formLogin()
 
     }
+
+    override fun configure(auth: AuthenticationManagerBuilder) {
+        auth.authenticationProvider(daoAuthenticationProvider())
+    }
+
 
     @Bean
     protected open fun daoAuthenticationProvider(): DaoAuthenticationProvider? {

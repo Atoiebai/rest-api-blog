@@ -20,7 +20,7 @@ public class LogAspect {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Pointcut("within(net.sublime.rest.service.user..* )")
+    @Pointcut("within(net.sublime.rest.jwt..*)")
     public void logPointcut() {}
 
     @Before("logPointcut()")

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping
-class PostController(
+open class PostController(
     private val postService: PostService
 ) {
 
