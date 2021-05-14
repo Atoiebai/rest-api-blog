@@ -4,7 +4,6 @@ import net.sublime.rest.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
-import java.lang.Exception
 
 @Service
 open class UserDetailsServiceImpl(
@@ -12,8 +11,8 @@ open class UserDetailsServiceImpl(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(name: String): UserDetails {
-       return userRepository.findUserByUserName(name)
-           .orElseGet { userRepository.findUserByEmail(name).orElseThrow() }
+        return userRepository.findUserByUserName(name)
+            .orElseGet { userRepository.findUserByEmail(name).orElseThrow() }
     }
 
 }

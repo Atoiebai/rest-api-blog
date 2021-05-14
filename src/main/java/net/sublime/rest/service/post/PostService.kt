@@ -1,7 +1,6 @@
 package net.sublime.rest.service.post
 
 import net.sublime.rest.dto.post.PostDTO
-import net.sublime.rest.model.post.Post
 
 interface PostService {
     fun getAll(): List<PostDTO>
@@ -9,4 +8,4 @@ interface PostService {
     fun createPost(post: PostDTO): PostDTO
     fun archivePost(post: PostDTO)
     fun archivePost(id: Long)
- }
+}

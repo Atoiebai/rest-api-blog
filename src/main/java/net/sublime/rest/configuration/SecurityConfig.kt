@@ -1,6 +1,7 @@
 package net.sublime.rest.configuration
 
 import net.sublime.rest.configuration.encoder.EncoderConfig
+import net.sublime.rest.jwt.JwtTokenVerifier
 import net.sublime.rest.jwt.JwtUsernameAndPasswordAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -28,6 +29,7 @@ open class SecurityConfig(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .addFilter(JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+            .addFilterAfter(JwtTokenVerifier() , JwtUsernameAndPasswordAuthenticationFilter::class.java)
             .authorizeRequests()
             .antMatchers("/api/blog/users/create")
             .permitAll()

@@ -50,9 +50,9 @@ open class JwtUsernameAndPasswordAuthenticationFilter(
             .claim("authorities", authResult.authorities)
             .setIssuedAt(Date())
             .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
-            .signWith(Keys.hmacShaKeyFor("This is a test string for security algorithm".toByteArray()))
+            .signWith(Keys.hmacShaKeyFor(JwtConfig.secretKey.toByteArray()))
             .compact()
 
-        response.addHeader("Authorization", "Bearer $token")
+        response.addHeader(JwtConfig.authorizationHeader, "Bearer $token")
     }
 }

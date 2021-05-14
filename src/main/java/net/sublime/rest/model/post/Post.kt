@@ -11,7 +11,8 @@ import javax.persistence.*
     name = "posts",
     uniqueConstraints = [
         UniqueConstraint(name = "user_id", columnNames = ["user_id"])
-    ])
+    ]
+)
 class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

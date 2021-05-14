@@ -11,7 +11,7 @@ enum class Role(
     USER(Permission.values().toSet());
 
 
-    fun  getAuthorities(): MutableSet<GrantedAuthority> {
+    fun getAuthorities(): MutableSet<GrantedAuthority> {
         return permission.stream().map { x ->
             SimpleGrantedAuthority(x.permissions)
         }.collect(Collectors.toSet())

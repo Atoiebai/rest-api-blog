@@ -1,9 +1,7 @@
 package net.sublime.rest.controller
 
 import net.sublime.rest.dto.user.UserDTO
-import net.sublime.rest.model.user.User
 import net.sublime.rest.service.user.UserService
-import org.springframework.data.repository.CrudRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

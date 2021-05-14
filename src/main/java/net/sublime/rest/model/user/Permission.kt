@@ -2,7 +2,7 @@ package net.sublime.rest.model.user
 
 enum class Permission(
     val permissions: String
-    ) {
+) {
 
     CAN_READ("can:read"),
     CAN_WRITE("can:write"),
