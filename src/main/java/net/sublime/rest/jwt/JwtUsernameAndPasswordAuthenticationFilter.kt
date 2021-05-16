@@ -8,7 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import java.io.IOException
-import java.time.LocalDate
 import java.util.*
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
@@ -49,10 +48,14 @@ open class JwtUsernameAndPasswordAuthenticationFilter(
             .setSubject(authResult.name)
             .claim("authorities", authResult.authorities)
             .setIssuedAt(Date())
-            .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
-            .signWith(Keys.hmacShaKeyFor(JwtConfig.secretKey.toByteArray()))
+            .setExpiration(Date(System.currentTimeMillis() +  EXPIRATION_TIME))
+            .signWith(Keys.hmacShaKeyFor(SECRET_KEY.toByteArray()))
             .compact()
-
-        response.addHeader(JwtConfig.authorizationHeader, "Bearer $token")
+        response.contentType = "application/json";
+        response.characterEncoding = "UTF-8";
+        response.writer.write(
+            "{\"token\" : \"Bearer $token\"}"
+        );
+        response.addHeader(AUTHORIZATION_HEADER, "Bearer $token")
     }
 }

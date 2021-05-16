@@ -20,17 +20,18 @@ class JwtTokenVerifier : OncePerRequestFilter() {
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val authorizationHeader = request.getHeader(JwtConfig.authorizationHeader)
+        val authorizationHeader = request.getHeader(AUTHORIZATION_HEADER)
         if (authorizationHeader.isNullOrEmpty() || !authorizationHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response)
             return
         }
+
         val token = authorizationHeader.replace("Bearer ", "")
         try {
             val claimsJws = Jwts.parserBuilder()
                 .setSigningKey(
                     Keys.hmacShaKeyFor(
-                        JwtConfig.secretKey.toByteArray()
+                        SECRET_KEY.toByteArray()
                     )
                 )
                 .build()
