@@ -12,7 +12,6 @@ open class UserController(
     private val userService: UserService,
 ) {
 
-    @CrossOrigin(origins = ["http://localhost:4200"])
     @GetMapping
     open fun getUsers(): ResponseEntity<List<UserDTO>> {
         return if (userService.getAll().isEmpty())
@@ -21,7 +20,6 @@ open class UserController(
             ResponseEntity(userService.getAll(), HttpStatus.OK)
     }
 
-    @CrossOrigin(origins = ["http://localhost:4200"])
     @GetMapping("/{id}")
     open fun getUser(@PathVariable id: Long): ResponseEntity<UserDTO> {
         return if (userService.getUser(id).equals(null))

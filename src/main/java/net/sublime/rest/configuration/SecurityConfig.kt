@@ -26,10 +26,11 @@ open class SecurityConfig(
         http
             .csrf()
             .disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .addFilter(JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
-            .addFilterAfter(JwtTokenVerifier() , JwtUsernameAndPasswordAuthenticationFilter::class.java)
+            .addFilterAfter(JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter::class.java)
             .authorizeRequests()
             .antMatchers("/api/blog/users/create")
             .permitAll()
