@@ -1,6 +1,5 @@
 package net.sublime.rest;
 
-import net.sublime.rest.repository.PostRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

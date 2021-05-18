@@ -15,8 +15,8 @@
     </parent>
 
     <properties>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <kotlin.version>1.4.31</kotlin.version>
         <start-class>net.sublime.rest.SpringApplicationStarter</start-class>
     </properties>
@@ -196,6 +196,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>net.sublime.rest.SpringApplicationStarter</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
