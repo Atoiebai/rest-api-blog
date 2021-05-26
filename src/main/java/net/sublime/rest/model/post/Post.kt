@@ -32,7 +32,7 @@ class Post {
     @UpdateTimestamp
     var updateAt: Date? = null
 
-    @ManyToOne(cascade = [CascadeType.MERGE], optional = false)
+    @ManyToOne(cascade = [CascadeType.MERGE], optional = false , fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     var user: User? = null
 }
