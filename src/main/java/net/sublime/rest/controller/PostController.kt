@@ -5,9 +5,17 @@ import net.sublime.rest.service.post.PostService
 import net.sublime.rest.service.user.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+import java.util.*
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import java.security.Principal
+
 
 @RestController
 @RequestMapping("api/blog/posts")
@@ -23,6 +31,7 @@ open class PostController(
         else ResponseEntity(postService.getAll(), HttpStatus.OK)
     }
 
+
     @PostMapping("/create")
     fun createNewPost(
         @RequestBody newPost: PostDTO,
@@ -31,6 +40,7 @@ open class PostController(
         newPost.user = userService.getByUsername(principal.name)
         postService.createPost(newPost);
         return ResponseEntity(newPost, HttpStatus.CREATED)
+
 
     }
 }
