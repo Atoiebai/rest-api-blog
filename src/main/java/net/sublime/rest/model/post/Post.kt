@@ -7,12 +7,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(
-    name = "posts",
-    uniqueConstraints = [
-        UniqueConstraint(name = "user_id", columnNames = ["user_id"])
-    ]
-)
+@Table(name = "posts")
 class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
