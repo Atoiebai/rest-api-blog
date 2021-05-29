@@ -12,4 +12,6 @@ interface UserService {
     fun addUser(userDTO: UserDTO): Boolean
 
     fun updateUser(userDTO: UserDTO)
+
+    fun getByUsername(identifier: String): UserDTO
 }

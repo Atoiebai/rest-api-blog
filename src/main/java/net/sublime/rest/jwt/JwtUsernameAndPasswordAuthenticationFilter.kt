@@ -24,7 +24,7 @@ open class JwtUsernameAndPasswordAuthenticationFilter(
         try {
             val authenticationRequest = ObjectMapper().readValue(
                 request?.inputStream,
-                UsernameAndPasswordAuthenticationRequest().javaClass
+                UsernameAndPasswordAuthenticationRequest::class.java
             )
 
             val authentication: Authentication = UsernamePasswordAuthenticationToken(
@@ -48,14 +48,14 @@ open class JwtUsernameAndPasswordAuthenticationFilter(
             .setSubject(authResult.name)
             .claim("authorities", authResult.authorities)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() +  EXPIRATION_TIME))
+            .setExpiration(Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .signWith(Keys.hmacShaKeyFor(SECRET_KEY.toByteArray()))
             .compact()
-        response.contentType = "application/json";
-        response.characterEncoding = "UTF-8";
+        response.contentType = "application/json"
+        response.characterEncoding = "UTF-8"
         response.writer.write(
             "{\"token\" : \"Bearer $token\"}"
-        );
+        )
         response.addHeader(AUTHORIZATION_HEADER, "Bearer $token")
     }
 }

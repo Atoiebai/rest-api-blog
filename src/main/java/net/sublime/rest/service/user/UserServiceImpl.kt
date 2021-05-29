@@ -7,6 +7,7 @@ import net.sublime.rest.model.user.User
 import net.sublime.rest.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.lang.RuntimeException
 import java.util.stream.Collectors
 
 @Service
@@ -44,6 +45,13 @@ open class UserServiceImpl(
     override fun updateUser(userDTO: UserDTO) {
         val user = userDTO.toUserEntity()
         userRepository.save(user)
+    }
+
+    override fun getByUsername(identifier: String): UserDTO {
+        return userRepository
+            .findUserByUserName(identifier)
+            .orElseThrow{ RuntimeException("No user with such username")}
+            .toTransferObject()
     }
 
 }

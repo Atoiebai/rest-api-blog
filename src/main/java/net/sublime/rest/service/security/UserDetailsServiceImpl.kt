@@ -12,7 +12,7 @@ open class UserDetailsServiceImpl(
 
     override fun loadUserByUsername(name: String): UserDetails {
         return userRepository.findUserByUserName(name)
-            .orElseGet { userRepository.findUserByEmail(name).orElseThrow() }
+            .orElseGet { userRepository.findUserByEmail(name).orElseThrow { RuntimeException() } }
     }
 
 }

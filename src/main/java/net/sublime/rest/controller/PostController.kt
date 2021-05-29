@@ -2,18 +2,25 @@ package net.sublime.rest.controller
 
 import net.sublime.rest.dto.post.PostDTO
 import net.sublime.rest.service.post.PostService
+import net.sublime.rest.service.user.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.io.File
-import java.nio.file.Files
+
 import java.util.*
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.*
+import java.security.Principal
+
 
 @RestController
 @RequestMapping("api/blog/posts")
 open class PostController(
+    private val userService: UserService,
     private val postService: PostService
 ) {
 
@@ -25,14 +32,15 @@ open class PostController(
     }
 
 
+    @PostMapping("/create")
+    fun createNewPost(
+        @RequestBody newPost: PostDTO,
+        @AuthenticationPrincipal principal: Principal
+    ): ResponseEntity<PostDTO> {
+        newPost.user = userService.getByUsername(principal.name)
+        postService.createPost(newPost);
+        return ResponseEntity(newPost, HttpStatus.CREATED)
 
-    fun getLines(file: File , lines: Int , words: Int) {
 
-       val fileContent = Files.readAllLines(file.toPath())
-        fileContent.stream().skip(fileContent.size - lines.toLong())
-            .flatMap { line: String ->
-                val splitWords = line.split("\\s+".toRegex()).toTypedArray()
-                Arrays.stream(splitWords).skip(splitWords.size - words.toLong())
-            }.forEach(System.out:: println)
     }
 }
