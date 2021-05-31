@@ -26,7 +26,7 @@ public class UserServiceTest {
     public void addUser() {
 
         UserDTO user = new UserDTO();
-        user.setUsername("Sublime_47");
+//        user.setUsername("Sublime_47");
         boolean isUserCreated = userService.addUser(user);
 //        Mockito.verify(userRepository , Mockito.times(1)).save(user);
         Assert.assertTrue(isUserCreated);
@@ -35,7 +35,7 @@ public class UserServiceTest {
     @Test
     public void checkUser() {
         UserDTO user = new UserDTO();
-        user.setUsername("Sublime_47");
+//        user.setUsername("Sublime_47");
         userService.addUser(user);
     }
 
