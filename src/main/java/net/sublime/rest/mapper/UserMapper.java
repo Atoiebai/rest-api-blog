@@ -7,16 +7,16 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
-public abstract class UserMapper {
+public interface UserMapper {
     @Mappings({
-            @Mapping(target="password", source="user.passwordKey"),
-            @Mapping(target="username", source="user.userName")
+            @Mapping(target = "password", source = "user.passwordKey"),
+            @Mapping(target = "username", source = "user.userName")
     })
-    public abstract UserDTO toDTO(User user);
+    UserDTO toDTO(User user);
 
     @Mappings({
-            @Mapping(target="passwordKey", source="userDTO.password"),
-            @Mapping(target="userName", source="userDTO.username")
+            @Mapping(target = "passwordKey", source = "userDTO.password"),
+            @Mapping(target = "userName", source = "userDTO.username")
     })
-    public abstract User toUser(UserDTO userDTO);
+    User toEntity(UserDTO userDTO);
 }

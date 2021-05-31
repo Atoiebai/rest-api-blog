@@ -19,7 +19,8 @@ open class UserServiceImpl(
     override fun getAll(): List<UserDTO> = userRepository
         .findAll()
         .stream()
-        .map(mapper::toDTO).collect(Collectors.toList())
+        .map(mapper::toDTO)
+        .collect(Collectors.toList())
 
 
     override fun getUser(id: Long): UserDTO = mapper.toDTO(userRepository.getOne(id))
@@ -31,7 +32,7 @@ open class UserServiceImpl(
 
     override fun addUser(userDTO: UserDTO): Boolean {
         // TODO: 2/26/2021 false if user exist
-        val user = mapper.toUser(userDTO)
+        val user = mapper.toEntity(userDTO)
         user.status = Status.ACTIVE
         user.role = Role.USER
         user.slug = user.username
@@ -42,7 +43,7 @@ open class UserServiceImpl(
     }
 
     override fun updateUser(userDTO: UserDTO) {
-        val user = mapper.toUser(userDTO)
+        val user = mapper.toEntity(userDTO)
         userRepository.save(user)
     }
 
@@ -50,7 +51,7 @@ open class UserServiceImpl(
         return mapper.toDTO(userRepository
             .findUserByUserName(identifier)
             .orElseThrow { RuntimeException("No user with such username") }
-        )
+                )
     }
 
 }
