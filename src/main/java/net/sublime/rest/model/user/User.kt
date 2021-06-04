@@ -20,7 +20,6 @@ import javax.validation.constraints.Size
     name = "users", uniqueConstraints = [
         UniqueConstraint(name = "user_email_unique", columnNames = ["email"]),
         UniqueConstraint(name = "user_username_unique", columnNames = ["username"]),
-        UniqueConstraint(name = "user_slug", columnNames = ["slug"])
     ]
 )
 class User : UserDetails {
@@ -64,9 +63,6 @@ class User : UserDetails {
     @UpdateTimestamp
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     var updatedAt: Date? = null
-
-    @Column(nullable = false)
-    var slug: String? = null
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
