@@ -35,7 +35,6 @@ open class UserServiceImpl(
         val user = mapper.toEntity(userDTO)
         user.status = Status.ACTIVE
         user.role = Role.USER
-        user.slug = user.username
         user.passwordKey = passwordEncoder.encode(user.passwordKey)
         userRepository.save(user)
         print(user)
