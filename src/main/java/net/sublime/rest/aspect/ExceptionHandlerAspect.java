@@ -15,7 +15,8 @@ public class ExceptionHandlerAspect {
     }
 
     @Pointcut("within(net.sublime.rest.service..*)")
-    public void exceptionPointcut() {}
+    public void exceptionPointcut() {
+    }
 
     @AfterThrowing("exceptionPointcut()")
     public void substituteToArithmetic(JoinPoint jp) {
